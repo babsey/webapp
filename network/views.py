@@ -20,17 +20,23 @@ from network.forms import *
 from result.models import Result
 from result.forms import CommentForm
 
+import os
+import cjson
 
 # Define models with its label, modeltypes and form
 MODELS = [
-    {'id_label': 'iaf_neuron', 		'model_type': 'neuron', 'form': DeviceForm,},
-    {'id_label': 'iaf_psc_alpha', 	'model_type': 'neuron', 'form': IafPscAlphaForm,},
-    {'id_label': 'ac_generator', 	'model_type': 'input', 	'form': ACGeneratorForm,},
-    {'id_label': 'dc_generator',	'model_type': 'input', 	'form': DeviceForm,},
-    {'id_label': 'poisson_generator',	'model_type': 'input', 	'form': PoissonGeneratorForm,},
-    {'id_label': 'noise_generator', 	'model_type': 'input', 	'form': NoiseGeneratorForm,},
-    {'id_label': 'spike_detector', 	'model_type': 'output', 'form': SpikeDetectorForm,},
-    {'id_label': 'voltmeter', 		'model_type': 'output', 'form': DeviceForm,},
+    {'model_type': 'neuron', 	'id_label': 'iaf_neuron', 	'form': DeviceForm,},
+    {'model_type': 'neuron', 	'id_label': 'iaf_psc_alpha', 	'form': IafPscAlphaForm,},
+    {'model_type': 'neuron', 	'id_label': 'parrot_neuron', 	'form': ParrotNeuronForm,},
+                                                                                           
+    {'model_type': 'input', 	'id_label': 'ac_generator', 	'form': ACGeneratorForm,},
+    {'model_type': 'input', 	'id_label': 'dc_generator',	'form': DCGeneratorForm,},
+    {'model_type': 'input', 	'id_label': 'poisson_generator','form': PoissonGeneratorForm,},
+    {'model_type': 'input', 	'id_label': 'noise_generator', 	'form': NoiseGeneratorForm,},
+    {'model_type': 'input', 	'id_label': 'spike_generator', 	'form': SpikeGeneratorForm,},   
+    
+    {'model_type': 'output', 	'id_label': 'spike_detector', 	'form': SpikeDetectorForm,},
+    {'model_type': 'output', 	'id_label': 'voltmeter', 	'form': VoltmeterForm,},
 ]
 
 @revision.create_on_success
@@ -42,16 +48,16 @@ def revision_create(obj, result=False, **kwargs):
 
 @render_to('network.html')
 @login_required
-def network(request, SPIC_id, local_network_id):
+def network(request, SPIC_id, local_id):
     """
     Main view for network workplace
     """
     
     # Check if prototype exists
-    prototype = get_object_or_404(Network, user_id=0, SPIC_id=SPIC_id, local_network_id=local_network_id)
+    prototype = get_object_or_404(Network, user_id=0, SPIC_id=SPIC_id, local_id=local_id)
 
     # If network is created, then it create a copy from prototype and an initial version of network.
-    network_obj, created = Network.objects.get_or_create(user_id=request.user.pk, SPIC_id=SPIC_id, local_network_id=local_network_id)
+    network_obj, created = Network.objects.get_or_create(user_id=request.user.pk, SPIC_id=SPIC_id, local_id=local_id)
     if created:
 	network_obj.devices_json = prototype.devices_json
 	revision_create(network_obj)
@@ -76,7 +82,49 @@ def network(request, SPIC_id, local_network_id):
 	elif request.POST.get('device_ids'):
 	    device_ids = [int(device_id) for device_id in request.POST.getlist('device_ids')]
 	    device_list = [dev for dev in network_obj.device_list() if not dev[0] in device_ids]
-	    network_obj.devices_json = simplejson.dumps(device_list)
+	    
+	    # get new device IDs and update
+	    new_device_ids = {}
+	    for index, device in enumerate(device_list):
+		if not index == device[0]:
+		    new_device_ids[str(device[0])] = index + 1
+		    device[0] = index + 1
+	    
+	    # correct device IDs and targets/sources
+	    for idx, device in enumerate(device_list):
+
+		if device[3] == {}:
+		    if 'targets' in device[3]:
+			key = 'targets'
+		    elif 'sources' in device[3]:	
+			key = 'sources'
+			
+		    value_list = device[3][key].split(',')
+		    values_index = [index for index, val in enumerate(value_list) if int(val) in device_ids]
+		    
+		    # delete old target/source
+		    value_list = [val for index, val in enumerate(value_list) if index not in values_index]
+		    
+		    # correct targets/sources
+		    value_list = [str(new_device_ids[val]) for val in value_list]
+		    values = ','.join(value_list)
+		    params = {key:values}
+		    
+		    # delete weight and delay
+		    if 'weight' in device[3]:
+			weight_list = device[3]['weight'].split(',')
+			weight_list = [val for index, val in enumerate(weight_list) if index not in values_index]
+			params['weight'] = ','.join(weight_list)
+			
+		    if 'delay' in device[3]:
+			delay_list = device[3]['delay'].split(',')
+			delay_list = [val for index, val in enumerate(delay_list) if index not in values_index]
+			params['delay'] = ','.join(delay_list)
+		    
+		    # merge all status
+		    device_list[idx] = device[0], device[1], device[2], params
+	    
+	    network_obj.devices_json = cjson.encode(device_list)
 	    network_obj.save()
 	    
     # Get a choice list for adding new device.
@@ -104,7 +152,7 @@ def network(request, SPIC_id, local_network_id):
     if version_id:
 	version = Version.objects.get(id=version_id)
 	version.revision.revert()
-	network_obj = Network.objects.get(user_id=request.user.pk, SPIC_id=SPIC_id, local_network_id=local_network_id)
+	network_obj = Network.objects.get(user_id=request.user.pk, SPIC_id=SPIC_id, local_id=local_id)
     else:
 	version_id = 0
 
@@ -115,11 +163,9 @@ def network(request, SPIC_id, local_network_id):
     except:
 	result_obj = None
 
-    # Create an image of network layout and get its url.
-    try:
-	networkx_url = networkx(network_obj.pk)
-    except:
-	networkx_url = None
+    # Get data for raphael creating SVG of network layout.
+    pos, holder = networkx(network_obj.pk, 'neuron', 'circo')
+    edgelist = network_obj.connections(data=True, modeltype='neuron')
     
     response = {
 	'network_obj': network_obj,
@@ -128,7 +174,9 @@ def network(request, SPIC_id, local_network_id):
 	'device_formsets': device_formsets,
 	'versions': versions,
 	'version_id': version_id,
-	'networkx_url': networkx_url
+	'pos': pos,
+	'holder': holder,
+	'edgelist': cjson.encode(edgelist),
     }
 	
     if result_obj:
@@ -166,11 +214,17 @@ def device_preview(request, network_id):
 		    modeltype = 'neuron'
 		model = {'label':label, 'type':modeltype}
 		
-		# in case sources is found, it doesn't save weight and delay.
+		# get sources or targets.
 		if 'targets' in data:
-		    params = {'targets': data.pop('targets')[0], 'weight': data.pop('weight')[0], 'delay': data.pop('delay')[0]}
+		    key = 'targets'
 		elif 'sources' in data:
-		    params = {'sources': data.pop('sources')[0]}
+		    key = 'sources'
+		    
+		# it doesn't save weight and delay, if they don't exist.		    
+		if 'weight' in data and 'delay' in data:
+		    params = {key: data.pop(key)[0], 'weight': data.pop('weight')[0], 'delay': data.pop('delay')[0]}
+		else:
+		    params = {key: data.pop(key)[0]}
 		status = {}
 		
 		# save status of each divices.
@@ -233,7 +287,7 @@ def device_commit(request, network_id):
 	device_list = devices.values()
 	device_list.sort()
 	
-	network_obj.devices_json = simplejson.dumps(device_list)
+	network_obj.devices_json = cjson.encode(device_list)
 	network_obj.save()
 	return HttpResponse(simplejson.dumps({'saved':1}), mimetype='application/json')
 	    
@@ -260,8 +314,8 @@ def simulate(request, network_id, version_id):
 		# Otherwise it simulates without creating new version.
 		if form.has_changed() or int(version_id) == 0:
 		    try:
-			last_local_result_id = versions[0].revision.result.local_result_id
-			revision_create(form, result=True, local_result_id = last_local_result_id+1, user_id = request.user.pk)
+			last_local_id = versions[0].revision.result.local_id
+			revision_create(form, result=True, local_id = last_local_id+1)
 		    except:
 			revision_create(form, result=True)
 		    task = Simulation.delay(network_id=network_id)
