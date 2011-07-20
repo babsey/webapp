@@ -12,7 +12,7 @@ urlpatterns = patterns ('',
 
 urlpatterns += patterns('network.views',
     
-    url(r'^(?P<SPIC_id>\d+)/(?P<local_network_id>\d+)/$', 'network', name='network'),
+    url(r'^(?P<SPIC_id>\d+)/(?P<local_id>\d+)/$', 'network', name='network'),
     
     # These following requests are in Ajax.
     url(r'^ajax/(?P<network_id>\d+)/(?P<version_id>\d+)/simulate/$', 'simulate', name='simulate'),
