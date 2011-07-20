@@ -1,0 +1,11 @@
+{% load network_tags %}
+
+<div class="ui-widget-header ui-corner-top" title="Doubleclick the title bar to close it."><span id="selected_device_id"></span> - {{id_label|readable}}</div>
+<div class="sub-header ui-widget-content">
+    {{form.as_div}}
+    
+    <div class="buttons">
+	<input type="submit" value="Apply" id="submit-device-form">
+	<input type="reset" value="Reset" id="reset-device-form">
+    </div>
+</div>
