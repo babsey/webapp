@@ -5,8 +5,8 @@
 {% load humanize %}
 
 {% block feeds %}
-    <link rel="alternate" type="application/atom+xml" title="New topics in forum" href="{% url forum_topics_feed forum.id %}" />
-    <link rel="alternate" type="application/atom+xml" title="New posts in forum" href="{% url forum_posts_feed forum.id %}" />
+    <link rel="alternate" type="application/atom+xml" title="New topics in forum" href="{% url 'forum_topics_feed' forum.id %}" />
+    <link rel="alternate" type="application/atom+xml" title="New posts in forum" href="{% url 'forum_posts_feed' forum.id %}" />
 {% endblock %}
 
 {% block title %}Discussions &raquo; {{ forum.name }}{% endblock %}
@@ -18,7 +18,7 @@
     {% if user.is_authenticated %}
         <div class="pull-right">
             <div class="btn-group">
-            <a role="button" class="" href="{% url subscribe_forum forum.id %}">
+            <a role="button" class="" href="{% url 'subscribe_forum' forum.id %}">
                 {% if subscribed %}
                     <span title="Unsubscribe topic">Unsubscribe</span>
                 {% else %}
@@ -26,12 +26,12 @@
                 {% endif %}
             </a>
             &middot;
-            <a role="button" class="" href="{% url forum_mark_read forum.id %}" class="mark_read">Mark forum as read</a>
+            <a role="button" class="" href="{% url 'forum_mark_read' forum.id %}" class="mark_read">Mark forum as read</a>
             </div>
         </div>
 
         {% if forum_perms.can_add_topic %}
-            <a role="button" class="btn btn-default" href="{% url topic_add forum.id %}">
+            <a role="button" class="btn btn-default" href="{% url 'topic_add' forum.id %}">
                 New topic
             </a>
         {% endif %}
@@ -56,7 +56,7 @@
             <tr>
                 <td class="status_icon">
                     {% if topic.unread %}
-                        <a href="{% url unread_post_redirect topic.id %}" title="Go to first unread post" class="status_icon fa fa-comment fa-2x"></a>
+                        <a href="{% url 'unread_post_redirect' topic.id %}" title="Go to first unread post" class="status_icon fa fa-comment fa-2x"></a>
                     {% else %}
                         <a href="{{ topic.get_absolute_url }}" title="No new posts"><i class="status_icon fa fa-comment-o fa-2x"></i></a>
                     {% endif %}
@@ -99,7 +99,7 @@
 {% block footer_feeds %}
     <div class="rss-link">
         <i class="fa fa-rss"></i>
-        <a href="{% url forum_topics_feed forum.id %}">New topics in forum</a> |
-        <a href="{% url forum_posts_feed forum.id %}">New posts in forum</a>
+        <a href="{% url 'forum_topics_feed' forum.id %}">New topics in forum</a> |
+        <a href="{% url 'forum_posts_feed' forum.id %}">New posts in forum</a>
     </div>
 {% endblock %}

@@ -49,9 +49,9 @@
 
             {% if user == profile.user %}
             <div class="btn-group" role="group">
-                <a role="button" class="btn btn-default" href="{% url profile_edit profile.id %}">Edit profile</a>
-                <a role="button" class="btn btn-default" href="{% url password_change %}">Change password</a>
-                <a role="button" class="btn btn-default" href="{% url forum_subscription %}">Forum subscriptions</a>
+                <a role="button" class="btn btn-default" href="{% url 'profile_edit' profile.id %}">Edit profile</a>
+                <a role="button" class="btn btn-default" href="{% url 'password_change' %}">Change password</a>
+                <a role="button" class="btn btn-default" href="{% url 'forum_subscription' %}">Forum subscriptions</a>
             </div>
             {% endif %}
         </div>

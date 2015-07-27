@@ -22,7 +22,7 @@
         <tbody>
             {% for network in network_list %}
             <tr>
-                <td><a href="{% url network network.SPIC.group network.SPIC.local_id network.local_id %}">{{ network.local_id }}</a></td>
+                <td><a href="{% url 'network' network.SPIC.group network.SPIC.local_id network.local_id %}">{{ network.local_id }}</a></td>
                 <td nowrap>{{ network.label|default_if_none:'untitled' }}</td>
                 <td nowrap>{{ network.date_simulated|timesince|default:"not simulated" }}{% if network.date_simulated %} ago {% endif %}</td>
                 <td style="text-align:center"><i class="fa {% if network.has_spike_detector %}fa-check text-success{% else %}fa-close text-danger{% endif %}"></i></td>

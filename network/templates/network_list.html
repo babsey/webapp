@@ -27,7 +27,7 @@
                 <div class="col-sm-5">
                     <div class="list-group" style="margin-top:60px">
                         {% for network in item.list %}
-                            <a class="list-group-item" href="{% url network_latest network.SPIC.group network.SPIC.local_id %}" title='{{ network.SPIC.description|safe }}'>
+                            <a class="list-group-item" href="{% url 'network_latest' network.SPIC.group network.SPIC.local_id %}" title='{{ network.SPIC.description|safe }}'>
                                 {% if user.is_authenticated %}
                                 <div class="badge">{{ network|count:user.id }}</div>
                                 {% endif %}

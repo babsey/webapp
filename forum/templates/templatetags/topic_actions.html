@@ -1,6 +1,6 @@
 <div class="topic_actions btn-group">
 {% if can_change %}
-    <a href="{% url topic_edit topic.id %}" class="topic_action btn btn-default" title="Edit topic">
+    <a href="{% url 'topic_edit' topic.id %}" class="topic_action btn btn-default" title="Edit topic">
         <i class="fa fa-edit"></i> Edit</a>
 {% endif %}
 
@@ -8,15 +8,15 @@
 <div class="topic_actions btn-group">
 
 {% if can_move_topic %}
-    <a href="{% url topic_move topic.id %}" class="topic_action btn btn-default" title="Move topic">Move</a>
+    <a href="{% url 'topic_move' topic.id %}" class="topic_action btn btn-default" title="Move topic">Move</a>
 {% endif %}
 
 {% if can_move_post %}
-    <a href="{% url post_move topic.id %}" class="topic_action btn btn-default" title="Move posts">Move posts</a>
+    <a href="{% url 'post_move' topic.id %}" class="topic_action btn btn-default" title="Move posts">Move posts</a>
 {% endif %}
 
 {% if can_split %}
-    <a href="{% url topic_split topic.id %}" class="topic_action btn btn-default" title="Split topic">
+    <a href="{% url 'topic_split' topic.id %}" class="topic_action btn btn-default" title="Split topic">
         <i class="fa fa-scissors"></i> Split</a>
 {% endif %}
 
@@ -24,7 +24,7 @@
 <div class="topic_actions btn-group">
 
 {% if can_stick %}
-    <a href="{% url topic_stick topic.id %}" class="topic_action btn btn-default" title="Stick/unstick topic">
+    <a href="{% url 'topic_stick' topic.id %}" class="topic_action btn btn-default" title="Stick/unstick topic">
     {% if topic.is_sticky %}
         <i class="fa fa-thumb-tack fa-rotate-270"></i>
         Unstick
@@ -36,7 +36,7 @@
 {% endif %}
 
 {% if can_close %}
-    <a href="{% url topic_close topic.id %}" class="topic_action btn btn-default" title="Close/open topic">
+    <a href="{% url 'topic_close' topic.id %}" class="topic_action btn btn-default" title="Close/open topic">
     {% if topic.is_closed %}
         <i class="fa fa-unlock-alt"></i>
         Open
@@ -51,7 +51,7 @@
 <div class="topic_actions btn-group">
 
 {% if can_delete %}
-    <a href="{% url topic_delete topic.id %}" class="topic_action btn btn-default" title="Delete topic" onclick="return confirm('Delete topic?');">
+    <a href="{% url 'topic_delete' topic.id %}" class="topic_action btn btn-default" title="Delete topic" onclick="return confirm('Delete topic?');">
         <i class="fa fa-trash"></i> Delete</a>
 {% endif %}
 

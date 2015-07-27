@@ -77,7 +77,7 @@
             $(this).text('Wait...');
 
             $.post(
-                "{% url post_preview %}",
+                "{% url 'post_preview' %}",
                 $('#add_topic_form').serialize(),
                 function(data){
                     $('#preview').html(data).scrollTo(500);

@@ -44,7 +44,7 @@
 {% block content %}
 <div class="container">
     <div class="form-signin center-block">
-        <form method="post" action="{% url login %}" id="login-form">
+        <form method="post" action="{% url 'login' %}" id="login-form">
             <h2 class="form-signin-heading">Please sign in</h2>
             {% csrf_token %}
             {{ form.non_field_errors }}
@@ -56,10 +56,10 @@
             <input type="hidden" name="next" value="{{ next }}" />
         </form>
         <div style="float:left">
-            <a href="{% url password_reset %}">Forgot your password?</a>
+            <a href="{% url 'password_reset' %}">Forgot your password?</a>
         </div>
         <div style="float:right">
-            <a href="{% url registration %}">Register</a>
+            <a href="{% url 'registration' %}">Register</a>
         </div>
     </div>
 </div>

@@ -1,16 +1,16 @@
 {% if can_change %}
     {% if post == post.topic.first_post %}
-        <a href="{% url topic_edit post.topic.id %}" title="Edit topic">Edit</a> &middot;
+        <a href="{% url 'topic_edit' post.topic.id %}" title="Edit topic">Edit</a> &middot;
     {% else %}
-        <a href="{% url post_edit post.id %}" title="Edit post">Edit</a> &middot;
+        <a href="{% url 'post_edit' post.id %}" title="Edit post">Edit</a> &middot;
     {% endif %}
 {% endif %}
 
 {% if can_delete %}
     {% if post == post.topic.first_post %}
-        <a href="{% url topic_delete post.topic.id %}" title="Delete topic" onclick="return confirm('Delete topic?');">Delete</a> &middot;
+        <a href="{% url 'topic_delete' post.topic.id %}" title="Delete topic" onclick="return confirm('Delete topic?');">Delete</a> &middot;
     {% else %}
-        <a href="{% url post_delete post.id %}" title="Delete post" onclick="return confirm('Delete post?');">Delete</a> &middot;
+        <a href="{% url 'post_delete' post.id %}" title="Delete post" onclick="return confirm('Delete post?');">Delete</a> &middot;
     {% endif %}
 {% endif %}
 

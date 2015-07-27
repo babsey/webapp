@@ -32,24 +32,24 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{% url mainpage %}">nuSPIC</a>
+                    <a class="navbar-brand" href="{% url 'mainpage' %}">nuSPIC</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li title="Home"><a href="{% url mainpage %}">
+                        <li title="Home"><a href="{% url 'mainpage' %}">
                             <i class="fa fa-home"></i> <span class="hidden-lg hidden-md hidden-sm">Home</span></a></li>
-                        <li class="" title="Networks"><a href="{% url network_list %}">
+                        <li class="" title="Networks"><a href="{% url 'network_list' %}">
                             <i class="fa fa-leaf"></i> <span class="hidden-md hidden-sm">Networks</span>
                             <span class="sr-only">(current)</span></a></li>
-                        <li class="" title="Discussions"><a href="{% url forum %}">
+                        <li class="" title="Discussions"><a href="{% url 'forum' %}">
                             <span class="glyphicon glyphicon-tree-deciduous"></span> <span class="hidden-md hidden-sm">Discussions</span></a></li>
                         <li class="" title="Tutorials"><a href="#">
                             <i class="fa fa-graduation-cap"></i> <span class="hidden-md hidden-sm">Tutorials</span></a></li>
-                        <li class="" title="News"><a href="{% url news_archive %}">
+                        <li class="" title="News"><a href="{% url 'news_archive' %}">
                             <i class="fa fa-newspaper-o"></i> <span class="hidden-md hidden-sm">News</span></a></li>
-                        <li class="" title="Community"><a href="{% url accounts %}">
+                        <li class="" title="Community"><a href="{% url 'accounts' %}">
                             <i class="fa fa-users"></i> <span class="hidden-md hidden-sm">Community</span></a></li>
                         <li class="" title="About"><a href="/about/">
                             <i class="fa fa-info-circle"></i> <span class="hidden-md hidden-sm">About</span></a></li>
@@ -63,22 +63,22 @@
                         <li><a href="/admin/">Admin</a></li>
                         {% endif %}
                         <li class="">
-                            <a href="{% url profile user.profile.id %}">
+                            <a href="{% url 'profile' user.profile.id %}">
                                 <i class="fa fa-user"></i> {{user.get_full_name }}
                             </a>
                         </li>
-                        <li><a href="{% url logout %}">
+                        <li><a href="{% url 'logout' %}">
                                 <i class="fa fa-sign-out"></i> Logout
                             </a>
                         </li>
                         {% else %}
                         <li class="">
-                            <a href="{% url login %}">
+                            <a href="{% url 'login' %}">
                                 <i class="fa fa-sign-in"></i> Login
                             </a>
                         </li>
                         <li class="">
-                            <a href="{% url registration %}">
+                            <a href="{% url 'registration' %}">
                                 <i class="fa fa-edit"></i> Register
                             </a>
                         </li>

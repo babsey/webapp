@@ -3,7 +3,7 @@
 <nav>
 <div class="nav navbar" style="margin-bottom:0">
     <div class="breadcrumb" style="margin-bottom:0">
-        <a href="{% url network_list %}">Network</a>
+        <a href="{% url 'network_list' %}">Network</a>
          &raquo; <span title="{{ SPIC_obj.description }}"><i class="fa fa-leaf"></i> {{ SPIC_obj.title }}</span> &raquo;
          <span class="dropdown">
              <button id="dropdownHistory" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -14,13 +14,13 @@
 
              <ul id="history-list" class="dropdown-menu" aria-labelledby="dropdownHistory">
                  <li>
-                     <a href="{% url network_history SPIC_obj.group SPIC_obj.local_id %}" tabindex="-1">
+                     <a href="{% url 'network_history' SPIC_obj.group SPIC_obj.local_id %}" tabindex="-1">
                          Overview
                      </a>
                  </li>
                  {% for network in network_list %}
                  <li id="history_{{ network.local_id }}">
-                     <a id="{{ network.local_id }}" href="{% url network SPIC_obj.group SPIC_obj.local_id network.local_id|default_if_none:0 %}" tabindex="-1">
+                     <a id="{{ network.local_id }}" href="{% url 'network' SPIC_obj.group SPIC_obj.local_id network.local_id|default_if_none:0 %}" tabindex="-1">
                          {% if network %}
                              <span class="pull-right"><i class="favorite {% if network.favorite %}fa fa-thumbs-up{% endif %}"></i></span>
                              <span style="display: inline-block; width: 15px"><b>{{ network.local_id }}</b></span>
@@ -34,7 +34,7 @@
 
              </ul>
          </span>
-         <a role="button" class="btn btn-default btn-xs" href="{% url network SPIC_obj.group SPIC_obj.local_id 0 %}"><i class="fa fa-reply"></i> Reset</a>
+         <a role="button" class="btn btn-default btn-xs" href="{% url 'network' SPIC_obj.group SPIC_obj.local_id 0 %}"><i class="fa fa-reply"></i> Reset</a>
 
          <div class="pull-right">
              <span><i class="fa fa-th"></i></span>
@@ -50,7 +50,7 @@
             </a>
         {% endif %}
     </div>
-    
+
     <div id="network-comment-form" class="hide fade">
         <div class="container">
             <div class="message"></div>

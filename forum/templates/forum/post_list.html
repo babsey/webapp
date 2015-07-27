@@ -5,7 +5,7 @@
 {% load forum_tags %}
 
 {% block feeds %}
-    <link rel="alternate" type="application/atom+xml" title="New posts" href="{% url topic_posts_feed topic.id %}" />
+    <link rel="alternate" type="application/atom+xml" title="New posts" href="{% url 'topic_posts_feed' topic.id %}" />
 {% endblock %}
 
 {% block title %}Discussions &raquo; {{ forum.name }} &raquo; {{ topic.name }}{% endblock %}
@@ -31,14 +31,14 @@ Topic: {{ topic.name }}
 {% block forum_nav %}
 <nav class="nav navbar">
     <div class="topic_menu pull-right">
-        <a href="{% url subscribe_topic topic.id %}">
+        <a href="{% url 'subscribe_topic' topic.id %}">
             {% if subscribed %}
                 <span title="Unsubscribe topic">Unsubscribe</span>
             {% else %}
                 <span title="Subscribe topic">Subscribe</span>
             {% endif %}
         </a>
-         &middot; <a href="{% url topic_mark_read topic.id %}" class="mark_read">Mark topic as read</a>
+         &middot; <a href="{% url 'topic_mark_read' topic.id %}" class="mark_read">Mark topic as read</a>
     </div>
 
     {% topic_actions topic forum_perms user %}
@@ -226,7 +226,7 @@ Topic: {{ topic.name }}
             $(this).text('Wait...');
 
             $.post(
-                "{% url post_preview %}",
+                "{% url 'post_preview' %}",
                 $('#add_post_form').serialize(),
                 function(data){
                     $('#preview').html(data).scrollTo(500);
@@ -321,5 +321,5 @@ Topic: {{ topic.name }}
 
 {% block footer_feeds %}
     <i class="fa fa-rss"></i>
-    <span class="rss-link"><a href="{% url topic_posts_feed topic.id %}">New posts</a></span>
+    <span class="rss-link"><a href="{% url 'topic_posts_feed' topic.id %}">New posts</a></span>
 {% endblock %}

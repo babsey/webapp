@@ -9,7 +9,7 @@
     <h2 class="page-header">Please sign in</h2>
 
     <div class="col-sm-8 col-sm-offset-2">
-        <form method="post" action="{% url login %}" id="login-form">
+        <form method="post" action="{% url 'login' %}" id="login-form">
             {% csrf_token %}
             {{ form.non_field_errors }}
             {% crispy form %}
@@ -17,10 +17,10 @@
             <input type="hidden" name="next" value="{{ next }}" />
         </form>
         <div style="float:left">
-            <a href="{% url password_reset %}">Forgot your password?</a>
+            <a href="{% url 'password_reset' %}">Forgot your password?</a>
         </div>
         <div style="float:right">
-            <a href="{% url registration %}">Register</a>
+            <a href="{% url 'registration' %}">Register</a>
         </div>
     </div>
 </div>

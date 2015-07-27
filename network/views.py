@@ -4,7 +4,6 @@ import os
 import re
 import time
 
-from celery.contrib.abortable import AbortableAsyncResult
 from celery.result import AsyncResult
 
 from django.conf import settings
@@ -241,9 +240,8 @@ def status(request):
     res.ready()
     return HttpResponse(json.dumps({'status': res.status, 'result': res.result }), content_type='application/json')
 
-def abort(request):
-    abortable_async_result = AbortableAsyncResult(request.GET['task_id'])
-    abortable_async_result.abort()
+def abort(request, task_id):
+    SimulationTask.abort(task_id=task_id)
     return HttpResponse()
 
 def data(request, network_id):
