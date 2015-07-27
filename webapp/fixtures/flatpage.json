@@ -1,0 +1,11 @@
+[
+    {
+        "model":    "flatpages.flatpage",
+        "pk":       1,
+        "fields": {
+            "url":      "",
+            "title":    "",
+            "content":  "",
+        }
+    },
+]

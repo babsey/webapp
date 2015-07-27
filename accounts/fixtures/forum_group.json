@@ -1,0 +1,44 @@
+[
+    {
+        "model":    "accounts.group",
+        "pk":       1,
+        "fields": {
+            "member_title":     "Admin",
+            "priority":         1,
+            "slug":             "Admin",
+            "title":            "Admin",
+        }
+    },
+    {
+        "model":    "accounts.group",
+        "pk":       2,
+        "fields": {
+            "member_title":     "Moderator",
+            "priority":         2,
+            "slug":             "Moderator",
+            "title":            "Moderator",
+        }
+    },
+    {
+        "model":    "accounts.group",
+        "pk":       3,
+        "fields": {
+            "is_default":       1,
+            "member_title":     "Member",
+            "priority":         3,
+            "slug":             "Member",
+            "title":            "Member",
+        }
+    },
+    {
+        "model":    "accounts.group",
+        "pk":       4,
+        "fields": {
+            "is_anonymous":     1,
+            "member_title":     "Guest",
+            "priority":         4,
+            "slug":             "Guest",
+            "title":            "Guest",
+        }
+    },
+]

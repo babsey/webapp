@@ -1,0 +1,18 @@
+[
+    {
+        "model":    "auth.user",
+        "pk":       1,
+        "fields": {
+          "first_name":     "Big",
+          "last_name":      "Boss",
+        }
+    },
+    {
+        "model":    "accounts.userprofile",
+        "pk":       1,
+        "fields": {
+            "user_id" :         1,
+            "forum_group_id":   1,
+        }
+    },
+]

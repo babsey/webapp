@@ -1,0 +1,53 @@
+[
+
+    {
+        "model":    "forum.topic",
+        "pk":       1,
+        "fields": {
+            "forum_id":         1,
+            "name":             "Welcome",
+            "first_post_id":    1,
+            "last_post_id":     3,
+            "posts_count":      3,
+            "is_closed":        1,
+        }
+    },
+    {
+        "model":    "forum.topic",
+        "pk":       2,
+        "fields": {
+            "forum_id":         2,
+            "name":             "Tutorial",
+        }
+    },
+    {
+        "model":    "forum.post",
+        "pk":       1,
+        "fields": {
+            "topic_id":         1,
+            "profile_id":       1,
+            "message":          "It works!",
+            "message_html":     "It works!.",
+        }
+    },
+    {
+        "model":    "forum.post",
+        "pk":       2,
+        "fields": {
+            "topic_id":         1,
+            "profile_id":       1,
+            "message":          "Congratulation on your first django-based, bootstrapped forum.",
+            "message_html":     "Congratulation on your first django-based, bootstrapped forum.",
+        }
+    },
+    {
+        "model":    "forum.post",
+        "pk":       3,
+        "fields": {
+            "topic_id":         1,
+            "profile_id":       1,
+            "message":          "This topic is already closed.",
+            "message_html":     "This topic is already closed.",
+        }
+    },
+]

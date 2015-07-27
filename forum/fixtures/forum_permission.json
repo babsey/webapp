@@ -1,0 +1,137 @@
+[
+    {
+        "model":    "forum.forum",
+        "pk":       1,
+        "fields": {
+            "name":         "General",
+            "description":  "This is a general forum."
+        }
+    },
+    {
+        "model":    "forum.forum",
+        "pk":       2,
+        "fields": {
+            "name":         "Team",
+            "description":  "This is a category for the team."
+        }
+    },
+    {
+        "model":    "forum.permission",
+        "pk":       1,
+        "fields": {
+            "forum_id":                 1,
+            "group_id":                 1,
+            "can_add_own_post":         1,
+            "can_add_own_topic":        1,
+            "can_change_group_post":    1,
+            "can_change_group_topic":   1,
+            "can_change_own_post":      1,
+            "can_change_own_topic":     1,
+            "can_close_group_topic":    1,
+            "can_close_own_topic":      1,
+            "can_delete_group_post":    1,
+            "can_delete_group_topic":   1,
+            "can_delete_own_post":      1,
+            "can_delete_own_topic":     1,
+            "can_move_group_post":      1,
+            "can_move_group_topic":     1,
+            "can_split_group_topic":    1,
+            "can_stick_group_topic":    1,
+        }
+    },
+    {
+        "model":    "forum.permission",
+        "pk":       2,
+        "fields": {
+            "forum_id":                 1,
+            "group_id":                 2,
+            "can_add_own_post":         1,
+            "can_add_own_topic":        1,
+            "can_change_group_post":    1,
+            "can_change_group_topic":   1,
+            "can_change_own_post":      1,
+            "can_change_own_topic":     1,
+            "can_close_group_topic":    1,
+            "can_close_own_topic":      1,
+            "can_delete_group_post":    1,
+            "can_delete_group_topic":   1,
+            "can_delete_own_post":      1,
+            "can_delete_own_topic":     1,
+            "can_move_group_post":      1,
+            "can_move_group_topic":     1,
+            "can_split_group_topic":    1,
+            "can_stick_group_topic":    1,
+        }
+    },
+    {
+        "model":    "forum.permission",
+        "pk":       3,
+        "fields": {
+            "forum_id":                 1,
+            "group_id":                 3,
+            "can_add_own_post":         1,
+            "can_add_own_topic":        1,
+            "can_change_own_post":      1,
+            "can_change_own_topic":     1,
+            "can_close_own_topic":      1,
+            "can_delete_own_post":      1,
+            "can_delete_own_topic":     1,
+        }
+    },
+    {
+        "model":    "forum.permission",
+        "pk":       4,
+        "fields": {
+            "forum_id":                 1,
+            "group_id":                 4,
+        }
+    },
+    {
+        "model":    "forum.permission",
+        "pk":       5,
+        "fields": {
+            "forum_id":                 2,
+            "group_id":                 1,
+            "can_add_own_post":         1,
+            "can_add_own_topic":        1,
+            "can_change_group_post":    1,
+            "can_change_group_topic":   1,
+            "can_change_own_post":      1,
+            "can_change_own_topic":     1,
+            "can_close_group_topic":    1,
+            "can_close_own_topic":      1,
+            "can_delete_group_post":    1,
+            "can_delete_group_topic":   1,
+            "can_delete_own_post":      1,
+            "can_delete_own_topic":     1,
+            "can_move_group_post":      1,
+            "can_move_group_topic":     1,
+            "can_split_group_topic":    1,
+            "can_stick_group_topic":    1,
+        }
+    },
+    {
+        "model":    "forum.permission",
+        "pk":       6,
+        "fields": {
+            "forum_id":                 2,
+            "group_id":                 2,
+            "can_add_own_post":         1,
+            "can_add_own_topic":        1,
+            "can_change_group_post":    1,
+            "can_change_group_topic":   1,
+            "can_change_own_post":      1,
+            "can_change_own_topic":     1,
+            "can_close_group_topic":    1,
+            "can_close_own_topic":      1,
+            "can_delete_group_post":    1,
+            "can_delete_group_topic":   1,
+            "can_delete_own_post":      1,
+            "can_delete_own_topic":     1,
+            "can_move_group_post":      1,
+            "can_move_group_topic":     1,
+            "can_split_group_topic":    1,
+            "can_stick_group_topic":    1,
+        }
+    },
+]
