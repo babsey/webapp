@@ -1,18 +1,20 @@
 Requirements
 ------------
 
- - Django 1.3 (http://www.djangoproject.com/)
- - Python 2.x (2.6+) (http://www.python.org/)
+ - Django 1.8.2 (http://www.djangoproject.com/)
+ - Python 2.7.9 (2.6+) (http://www.python.org/)
  - Any Django supported database (http://docs.djangoproject.com/en/dev/ref/databases/)
- - recaptcha-client 1.0.5 or higher (http://pypi.python.org/pypi/recaptcha-client)
- - django-bbmarkup (http://bitbucket.org/offline/django-bbmarkup)
+ - ? recaptcha-client 1.0.5 or higher (http://pypi.python.org/pypi/recaptcha-client)
+ - ? django-bbmarkup (http://bitbucket.org/offline/django-bbmarkup)
 
- - (RabbitMQ, Broker for Celery (http://jazstudios.blogspot.com/2010/11/setup-django-rabbitmq-and-celery.html))
- - Celery integration for Django 2.3.3 (https://github.com/ask/django-celery)
- - Reversion integration for Django 1.5 (https://github.com/etianen/django-reversion)
+ - ? (RabbitMQ, Broker for Celery (http://jazstudios.blogspot.com/2010/11/setup-django-rabbitmq-and-celery.html))
+ - Celery integration for Django 3.1.16 (https://github.com/ask/django-celery)
+ - ? Reversion integration for Django 1.5 (https://github.com/etianen/django-reversion)
  - Form utils integration for Django 0.2.0 (http://pypi.python.org/pypi/django-form-utils)
- - Networkx 1.5 (http://networkx.lanl.gov/)
+ - Networkx 1.9.1 (http://networkx.lanl.gov/)
  - cjson for Python 1.0.5 (http://pypi.python.org/pypi/python-cjson)
+
+ - NEST 2.6.0
 
 
 Optional
